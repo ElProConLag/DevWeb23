@@ -1,0 +1,72 @@
+.Logo-UDP{
+    height: auto;
+    width: 100%;
+    padding: 0 10%;
+}
+header{
+    background-color: rgb(255,255,255) !important;
+}
+.Bienvenida{
+    background-color: rgb(255, 255, 255);
+}
+.Registro{
+    margin: auto;
+    width: auto;
+    height: auto;
+    padding: 5% 35%;
+}
+.Ingreso{
+    margin: auto;
+    width: auto;
+    height: auto;
+    padding: 5% 35%;
+}
+.Continuar{
+    text-decoration-line: rgb(255,255,255);
+}
+.Presentacion{
+    margin: auto;
+    width: auto;
+    padding: 5% 30%;
+}
+.Logo-UDP2{
+    height: auto;
+    width: 70%;
+    padding: 0 15%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+.btn-outline-danger a{
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+}
+.btn-danger a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+a:hover{
+    text-decoration: underline;
+}
+.btn-outline-danger a:hover{
+    color:rgb(255, 255, 255)
+}
+.btn-primary a{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+.Recarga{
+    margin: auto;
+    width: auto;
+    height: auto;
+    padding: 5% 35%;
+}
+h5 p a{
+    color: rgb(0, 0, 0);
+}
+.Transferencia{
+    margin: auto;
+    width: auto;
+    height: auto;
+    padding: 5% 35%;
+}
