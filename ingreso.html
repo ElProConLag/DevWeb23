@@ -30,6 +30,41 @@
               <button type="button" class="btn btn-outline-danger me-1"><a href="./ingreso.html">Ingresar</a></button>
               <button type="button" class="btn btn-danger ms-1"><a href="./registro.html">Registrarse</a></button>
           </div>
+          <script>
+            function checkSession() {
+              const jwtCookie = document.cookie.split(';').find(cookie => cookie.trim().startsWith('jwt='));
+              if (jwtCookie) {
+                fetch('http://54.156.208.82:80', {
+                  headers: {
+                    Authorization: `Bearer ${jwtCookie.split('=')[1]}`
+                  }
+                })
+                .then(response => {
+                  if (response.ok) {
+                    // Show the selected buttons
+                    const buttons = document.querySelectorAll('.nav-link');
+                    buttons.forEach(button => button.style.display = 'block');
+                  } else {
+                    // Hide the selected buttons
+                    const buttons = document.querySelectorAll('.nav-link');
+                    buttons.forEach(button => button.style.display = 'none');
+                  }
+                })
+                .catch(error => {
+                  console.error('Error fetching data:', error);
+                  // Hide the selected buttons
+                  const buttons = document.querySelectorAll('.nav-link');
+                  buttons.forEach(button => button.style.display = 'none');
+                });
+              } else {
+                // Hide the selected buttons
+                const buttons = document.querySelectorAll('.nav-link');
+                buttons.forEach(button => button.style.display = 'none');
+              }
+            }
+      
+            checkSession();
+          </script>
       </header>
   
     <div>
