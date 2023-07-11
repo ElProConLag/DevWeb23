@@ -1,5 +1,35 @@
 <!DOCTYPE html>
 <html lang="es">
+    <script>
+       const apiUrl = 'http://localhost:3000';
+       
+       function checkToken() {
+           const token = localStorage.getItem('token');
+           if (!token) {
+               window.location.href = './ingreso.html';
+           }
+           else{
+            fetch(apiUrl + '/registro').then(response => response.json()).then(data => {
+       console.log(data); 
+       }).catch(error => console.log('El error que se muestra es: ' + error + ' por favor vuelva a intentarlo'));
+
+       const requestData = {
+
+        key1: 'Value 1',
+        key2: 'Value 2'
+        };
+        fetch(apiUrl + '/registro', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestData)}).then(response => response.json()).then(data => {console.log(data);
+    }).catch(error => {
+        console.log(data); 
+       }).catch(error => console.log('El error que se muestra es: ' + error + ' por favor vuelva a intentarlo'));
+           }
+       }
+    </script>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

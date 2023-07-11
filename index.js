@@ -6,7 +6,7 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://publicGithubAuth:3HQaWMwhAu7MVi4n@devweb.or5phdi.mongodb.net/?retryWrites=true&w=majority";
 const limiter = rateLimit({
   windowMs: 60 * 1000, //1 minuto de duración como maximo
-  max: 5, //5 peticiones como maximo a la vez
+  max: 20, //5 peticiones como maximo a la vez
 });
 const client = new MongoClient(uri, {
   serverApi: {
