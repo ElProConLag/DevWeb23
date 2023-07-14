@@ -30,6 +30,23 @@
             <button type="button" class="btn btn-outline-danger me-1"><a href="./ingreso.html">Ingresar</a></button>
             <button type="button" class="btn btn-danger ms-1"><a href="./registro.html">Registrarse</a></button>
         </div>
+        <script>
+            function checkSession() {
+              checkSessionToken()
+                .then(() => {
+                  // Show the selected buttons
+                  const buttons = document.querySelectorAll('.nav-link');
+                  buttons.forEach(button => button.style.display = 'block');
+                })
+                .catch(() => {
+                  // Hide the selected buttons
+                  const buttons = document.querySelectorAll('.nav-link');
+                  buttons.forEach(button => button.style.display = 'none');
+                });
+            }
+          
+            checkSession();
+          </script>
     </header>
     <h1>
         <p class="text-center">¡Bienvenidos al Banco UDP!</p>
