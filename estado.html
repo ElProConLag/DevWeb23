@@ -9,9 +9,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/a6d65e1728.js" crossorigin="anonymous"></script>
     <script src="./apiconnect.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 </head>
 <body>
-    <script>checkSessionToken();</script>
     <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
         <div class="col-md-2 mb-2 mb-md-0">
           <a href="./index.html"><img class="Logo-UDP" src="https://www.udp.cl/cms/wp-content/themes/udp_portable/images/udp_rojo.png"></a>
@@ -29,42 +29,113 @@
               </li>
           </ul>
           <div class="col-md-3 text-end me-2">
-            <button type="button" class="btn btn-outline-danger me-1"><a href="./index.html"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></button>
+              <button type="button" class="btn btn-outline-danger me-1"><a href="./ingreso.html">Ingresar</a></button>
+              <button type="button" class="btn btn-danger ms-1"><a href="./registro.html">Registrarse</a></button>
           </div>
+          <script>
+            function checkSession() {
+              if(checkSessionToken() == true){
+                // Show the selected buttons
+                const buttons = document.querySelectorAll('.nav-link');
+                buttons.forEach(button => button.style.display = 'block');
+                // create a const that selects all btn inside nav
+                const loginbtn = document.querySelectorAll('.btn-outline-danger');
+                const registerbtn = document.querySelectorAll('.btn-danger');
+                // hide login and register btn
+                loginbtn.forEach(button => button.style.display = 'none');
+                registerbtn.forEach(button => button.style.display = 'none');
+                // insert "<button type="button" class="btn btn-outline-danger me-1"><a href="./index.html"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></button>"
+        
+                const logoutbtn = document.createElement('button');
+                logoutbtn.setAttribute('type', 'button');
+                logoutbtn.setAttribute('class', 'btn btn-outline-danger me-1');
+                logoutbtn.innerHTML = '<a href="./index.html"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a>';
+                document.querySelector('.col-md-3.text-end.me-2').appendChild(logoutbtn);
+                logoutbtn.addEventListener('click', () => {
+                  deleteSessionToken();
+                  window.location.href = './index.html';
+                });
+              } else {
+                // Hide the selected buttons
+                const buttons = document.querySelectorAll('.nav-link');
+                buttons.forEach(button => button.style.display = 'none');
+              }
+            }
+          
+            checkSession();
+          </script>
       </header>
 
+      <h1>Estado de cuenta</h1>
+
+      <table class="table table-striped">
+        <thead>
+          <th>Monto</th>
+          <th>Email</th>
+          <th>Comentario</th>
+        </thead>
+      </table>
       <script>
-        // Fetch the movement information and build the table
-        getMovementInfo()
-          .then(data => {
-            const tableBody = document.querySelector('#movement-table tbody');
-            const saldoDisponible = document.querySelector('#saldo-disponible');
-            let saldo = 0;
-
-            data.forEach(movement => {
-              const row = document.createElement('tr');
-              const emailCell = document.createElement('td');
-              const montoCell = document.createElement('td');
-              const comentarioCell = document.createElement('td');
-
-              emailCell.textContent = movement.email;
-              montoCell.textContent = movement.amount;
-              comentarioCell.textContent = movement.comment;
-
-              row.appendChild(emailCell);
-              row.appendChild(montoCell);
-              row.appendChild(comentarioCell);
-              tableBody.appendChild(row);
-
-              saldo += parseInt(movement.amount);
+        async function getMovements() {
+          try {
+            const cookie_token = getAuthToken();
+            const response = await fetch('http://54.156.208.82:80/movimientos', {
+              method: 'GET',
+              //add the Authorization header
+              headers: {
+                'Authorization': cookie_token
+              }
             });
-
-            saldoDisponible.textContent = `Saldo disponible: $${saldo.toLocaleString()}`;
-          })
-          .catch(error => {
+            console.log(response);
+            console.log(response.headers.get('Authorization'));
+            console.log(cookie_token);
+            const data = await response.json();
+            console.log(data);
+            return data.movements;
+          } catch (error) {
             console.error(error);
-          });
-    </script>
+            alert(error.message);
+          }
+        }
+      
+        async function displayMovements() {
+          try {
+            const movements = await getMovements();
+            const movementsContainer = document.querySelector('.table');
+      
+            if (!movements || movements.length === 0) {
+              const tr = document.createElement('tr');
+              const tdError = document.createElement('td');
+              tdError.colSpan = 3;
+              tdError.textContent = 'No se encontraron movimientos';
+              tr.appendChild(tdError);
+              movementsContainer.appendChild(tr);
+              return;
+            }
+      
+            movements.forEach(movement => {
+              const tr = document.createElement('tr');
+              const tdAmount = document.createElement('td');
+              const tdEmail = document.createElement('td');
+              const tdComment = document.createElement('td');
+      
+              tdAmount.textContent = movement.amount;
+              tdEmail.textContent = movement.email;
+              tdComment.textContent = movement.comment;
+      
+              tr.appendChild(tdAmount);
+              tr.appendChild(tdEmail);
+              tr.appendChild(tdComment);
+              movementsContainer.appendChild(tr);
+            });
+          } catch (error) {
+            console.error(error);
+            alert(error.message);
+          }
+        }
+      
+        displayMovements();
+      </script>
         <div class="row">
             <div class="col-12">
                 <button type="button" class="btn btn-danger"><a href="./recargar.html">Recargar</a></button>

@@ -27,8 +27,41 @@
               </li>
           </ul>
           <div class="col-md-3 text-end me-2">
-             <button type="button" class="btn btn-outline-danger me-1"><a href="./index.html"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></button>
-          </div>
+            <button type="button" class="btn btn-outline-danger me-1"><a href="./ingreso.html">Ingresar</a></button>
+            <button type="button" class="btn btn-danger ms-1"><a href="./registro.html">Registrarse</a></button>
+        </div>
+          <script>
+            function checkSession() {
+              if(checkSessionToken() == true){
+                // Show the selected buttons
+                const buttons = document.querySelectorAll('.nav-link');
+                buttons.forEach(button => button.style.display = 'block');
+                // create a const that selects all btn inside nav
+                const loginbtn = document.querySelectorAll('.btn-outline-danger');
+                const registerbtn = document.querySelectorAll('.btn-danger');
+                // hide login and register btn
+                loginbtn.forEach(button => button.style.display = 'none');
+                registerbtn.forEach(button => button.style.display = 'none');
+                // insert "<button type="button" class="btn btn-outline-danger me-1"><a href="./index.html"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a></button>"
+
+                const logoutbtn = document.createElement('button');
+                logoutbtn.setAttribute('type', 'button');
+                logoutbtn.setAttribute('class', 'btn btn-outline-danger me-1');
+                logoutbtn.innerHTML = '<a href="./index.html"><i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión</a>';
+                document.querySelector('.col-md-3.text-end.me-2').appendChild(logoutbtn);
+                logoutbtn.addEventListener('click', () => {
+                  deleteSessionToken();
+                  window.location.href = './index.html';
+                });
+              } else {
+                // Hide the selected buttons
+                const buttons = document.querySelectorAll('.nav-link');
+                buttons.forEach(button => button.style.display = 'none');
+              }
+            }
+          
+            checkSession();
+          </script>
       </header>
       <div class="Recarga">
         <h1>Recargar Monto</h1>
