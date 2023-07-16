@@ -85,7 +85,29 @@
           </form>
           
           <script>
-            
+
+            $('#register-form').submit(function(event) {
+              event.preventDefault();
+              const name = $('#name').val();
+              const email = $('#email').val();
+              const password = $('#password').val();
+              $.ajax({
+                url: `http://54.156.208.82:80/usuario?name=${name}&email=${email}&password=${password}`,
+                method: 'POST',
+                success: function(response) {
+                  //if response is ok, display the message with alert and redirect to login
+                  if(response.message == 'Usuario registrado') {
+                    alert(response.message);
+                    window.location.href = './ingreso.html';
+                  } else {
+                    alert(response.message);
+                  }
+                },
+                error: function(error) {
+                  alert(error.responseJSON.message);
+                }
+              });
+            });
           </script>
     </div>
     <img class="Logo-UDP2" src="https://periodismo.udp.cl/cms/wp-content/uploads/2022/03/220314_Logo-40-anos-udp__Version-en-rojo-02-e1647374842330.png">

@@ -69,12 +69,46 @@
       </header>
       <div class="Recarga">
         <h1>Recargar Monto</h1>
-        <label for="text">Ingresar Monto Deseado</label>
-        <input type="number" class="form-control" id="number" placeholder="Ingrese Monto sin puntos ni comas.."><br>
-        <label for="text">Ingresar Número De Tarjeta De Crédito O Débito</label>
-        <input type="number" class="form-control" id="number" placeholder="Ingrese Número de Tarjeta..."><br>
-        <button type="button" class="btn btn-danger ms-1"><a href="./recargar.html"></a>Recargar</button>
+        <form id="recargar-form" class="Recargar">
+          <div class="feature col">
+            <div class="feature-icon d-inline-flex align-items-center justify-content-center text-bg-primary bg-gradient fs-2 mb-3"></div>
+            <h3 class="fs-2">Formulario de Recarga</h3>
+            <label for="credit-card">Número de tarjeta de crédito (16 dígitos)</label>
+            <input class="form-control" id="credit_card" type="text" pattern="[0-9]{16}" placeholder="Número de tarjeta de crédito"><br>
+            <label for="amount">Monto a recargar</label>
+            <input class="form-control" id="amount" type="number" min="0" step="1" placeholder="Monto a retirar"><br>
+            <button type="submit" class="btn btn-primary Recargar">Recargar</button>
+            <svg class="bi"></svg>
+          </div>
+        </form>
       </div>
+      <script>
+
+        $('#recargar-form').submit(function(event) {
+          event.preventDefault();
+          const credit_card = $('#credit_card').val();
+          const amount = $('#amount').val();
+          const cookie_token = getAuthToken();
+          $.ajax({
+            url: `http://54.156.208.82:80/recargar?amount=${amount}&credit_card=${credit_card}`,
+            method: 'POST',
+            headers: {
+              'Authorization': cookie_token,
+            },
+            success: function(response) {
+              if (response.message == 'Recarga exitosa') {
+                alert(response.message);
+                window.location.href = './estado.html';
+              } else {
+                alert(response.message);
+              }
+            },
+            error: function(error) {
+              alert(error.responseJSON.message);
+            }
+          });
+        });
+      </script>
       <img class="Logo-UDP2" src="https://periodismo.udp.cl/cms/wp-content/uploads/2022/03/220314_Logo-40-anos-udp__Version-en-rojo-02-e1647374842330.png">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 </body>

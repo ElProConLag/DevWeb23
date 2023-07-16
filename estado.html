@@ -78,6 +78,8 @@
           <th>Comentario</th>
         </thead>
       </table>
+      <div class="finalAmount"></div>
+      <div class="creditCard"></div>
       <script>
         async function getMovements() {
           try {
@@ -138,6 +140,78 @@
         }
       
         displayMovements();
+
+        async function getAmount() {
+          try {
+            const cookie_token = getAuthToken();
+            const response = await fetch('http://54.156.208.82:80/usuario', {
+              method: 'GET',
+              //add the Authorization header
+              headers: {
+                'Authorization': cookie_token
+              }
+            });
+            const data = await response.json();
+            console.log(data);
+            return data.amount;
+          } catch (error) {
+            console.error(error);
+            alert(error.message);
+          }
+        }
+
+        async function displayAmount() {
+          //display amount below the table, with a h2 tag
+          try {
+            const amount = await getAmount();
+            console.log(amount);
+            const amountContainer = document.querySelector('.finalAmount');
+            const h2 = document.createElement('h2');
+            h2.textContent = `Saldo final: $ ${amount}`;
+            amountContainer.appendChild(h2);
+          } catch (error) {
+            console.error(error);
+            alert(error.message);
+          }
+        }
+
+        displayAmount();
+
+        async function getCreditCard() {
+          try {
+            const cookie_token = getAuthToken();
+            const response = await fetch('http://54.156.208.82:80/usuario', {
+              method: 'GET',
+              //add the Authorization header
+              headers: {
+                'Authorization': cookie_token
+              }
+            });
+            const data = await response.json();
+            console.log(data);
+            return data.credit_card;
+          } catch (error) {
+            console.error(error);
+            alert(error.message);
+          }
+        }
+
+        async function displayCreditCard() {
+          //display amount below the amount, with a h2 tag
+          try {
+            const credit_card = await getCreditCard();
+            console.log(credit_card);
+            const creditCardContainer = document.querySelector('.creditCard');
+            const h2 = document.createElement('h2');
+            h2.textContent = `Tarjeta de crédito: ${credit_card}`;
+            creditCardContainer.appendChild(h2);
+          } catch (error) {
+            console.error(error);
+            alert(error.message);
+          }
+        }
+
+        displayCreditCard();
       </script>
         <div class="row">
             <div class="col-12">

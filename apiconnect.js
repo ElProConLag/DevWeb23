@@ -4,9 +4,7 @@ function setSessionToken(token) {
   date.setTime(date.getTime() + (365 * 24 * 60 * 60 * 1000)); // set expiration date to one year from now
   const expires = `expires=${date.toUTCString()}`;
   const path = 'path=/';
-  const sameSite = 'SameSite=None';
-  const secure = 'Secure';
-  const cookieValue = `authToken=${token}; ${expires}; ${path}; ${sameSite}; ${secure}`;
+  const cookieValue = `authToken=${token}; ${expires}; ${path}`;
   document.cookie = cookieValue;
 }
 

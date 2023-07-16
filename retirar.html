@@ -97,7 +97,7 @@
               'Authorization': cookie_token,
             },
             success: function(response) {
-              if (response.token) {
+              if (response.message == 'Retiro exitoso') {
                 alert(response.message);
                 window.location.href = './estado.html';
               } else {
