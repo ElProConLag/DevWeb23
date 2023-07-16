@@ -76,3 +76,17 @@ h5 p a{
     height: auto;
     padding: 5% 35%;
 }
+.table-striped{
+    margin: auto;
+    width: auto;
+    height: auto;
+}
+div.col12{
+    margin: auto;
+    width: auto;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
