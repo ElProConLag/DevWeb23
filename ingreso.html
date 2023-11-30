@@ -90,7 +90,7 @@
           const email = $('#email').val();
           const password = $('#password').val();
           $.ajax({
-            url: `http://54.156.208.82:80/ingresar?email=${email}&password=${password}`,
+            url: `http://54.156.208.82:80/ingresar?email=${email}&password=${password}`,//no disponible
             method: 'POST',
             success: function(response) {
               if (response.token) {

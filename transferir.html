@@ -93,7 +93,7 @@
         const comment = $('#comment').val();
         const cookie_token = getAuthToken();
         $.ajax({
-          url: `http://54.156.208.82:80/transferir?email=${email}&amount=${amount}&comment=${comment}`,
+          url: `http://54.156.208.82:80/transferir?email=${email}&amount=${amount}&comment=${comment}`,//no disponible
           method: 'POST',
           headers: {
             'Authorization': cookie_token,

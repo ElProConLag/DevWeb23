@@ -4,9 +4,10 @@
 
 | Browser           | Supported          |
 | ----------------- | ------------------ |
-| Firefox           | :white_check_mark: |
+| Mozilla Firefox   | :white_check_mark: |
 | Chromium          | :white_check_mark: |
-| Chrome            | :white_check_mark: |
+| Google Chrome     | :white_check_mark: |
+| Microsoft Edge    | :white_check_mark: |
 | Internet Explorer | :x:                |
 
 ## Reporting a Vulnerability

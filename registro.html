@@ -92,7 +92,7 @@
               const email = $('#email').val();
               const password = $('#password').val();
               $.ajax({
-                url: `http://54.156.208.82:80/usuario?name=${name}&email=${email}&password=${password}`,
+                url: `http://54.156.208.82:80/usuario?name=${name}&email=${email}&password=${password}`,//no disponible
                 method: 'POST',
                 success: function(response) {
                   //if response is ok, display the message with alert and redirect to login

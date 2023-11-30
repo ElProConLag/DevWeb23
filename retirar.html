@@ -92,7 +92,7 @@
           const amount = $('#amount').val();
           const cookie_token = getAuthToken();
           $.ajax({
-            url: `http://54.156.208.82:80/retirar?amount=${amount}&credit_card=${credit_card}`,
+            url: `http://54.156.208.82:80/retirar?amount=${amount}&credit_card=${credit_card}`,//no disponible
             method: 'POST',
             headers: {
               'Authorization': cookie_token,
