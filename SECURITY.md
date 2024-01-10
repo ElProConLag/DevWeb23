@@ -2,16 +2,15 @@
 
 ## Supported Web Browsers
 
-| Browser           | Supported          |
-| ----------------- | ------------------ |
-| Mozilla Firefox   | :white_check_mark: |
-| Chromium          | :white_check_mark: |
-| Google Chrome     | :white_check_mark: |
-| Microsoft Edge    | :white_check_mark: |
-| Internet Explorer | :x:                |
+| Browser                                                                                                         | Supported          |
+| --------------------------------------------------------------------------------------------------------------- | ------------------ |
+| <img height="16" width="16" src="https://cdn.simpleicons.org/firefoxbrowser/black/white" /> Mozilla Firefox     | :white_check_mark: |
+| Chromium                                                                                                        | :white_check_mark: |
+| <img height="16" width="16" src="https://cdn.simpleicons.org/googlechrome/black/white" /> Google Chrome         | :white_check_mark: |
+| <img height="16" width="16" src="https://cdn.simpleicons.org/microsoftedge/black/white" /> Microsoft Edge       | :white_check_mark: |
+| <img height="16" width="16" src="https://cdn.simpleicons.org/internetexplorer/black/white" /> Internet Explorer | :x:                |
 
 ## Reporting a Vulnerability
 
-:email: camilo.pinto1@mail.udp.cl
-
-:email: alex.nunez@mail.udp.cl
+- <img height="16" width="16" src="https://cdn.simpleicons.org/gmail/black/white" /> camilo.pinto1@mail.udp.cl
+- <img height="16" width="16" src="https://cdn.simpleicons.org/gmail/black/white" /> alex.nunez@mail.udp.cl
